@@ -8,13 +8,12 @@ export const fetchTodos = async () => {
 };
 
 export const createTodo = async (todo: string) => {
-  const res = await axios.post(API_URL, {todo});
+  const res = await axios.post(API_URL, { todo });
   return res.data;
 };
 
 export const updateTodo = async (id: string, todo: string) => {
-  console.log('updateTodo', id, todo);
-  const res = await axios.put(`${API_URL}/${id}`, {todo});
+  const res = await axios.put(`${API_URL}/${id}`, { todo });
   return res.data;
 };
 

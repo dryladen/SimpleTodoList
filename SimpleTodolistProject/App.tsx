@@ -12,7 +12,7 @@ const App = () => {
   };
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }} >
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white', flexDirection:'column', position: 'relative' }} >
         <StatusBar
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           backgroundColor={backgroundStyle.backgroundColor}

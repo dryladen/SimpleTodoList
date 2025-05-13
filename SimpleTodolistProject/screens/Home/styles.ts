@@ -7,17 +7,24 @@ export const styles = StyleSheet.create({
         borderRadius: 8, // Equivalent to rounded-lg
     },
     headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        display: 'flex', 
         paddingVertical: 16,
         paddingHorizontal: 20,
         backgroundColor: '#4D55CC',
     },
     
     addButton: {
-        padding: 8,
-        paddingHorizontal: 12,
-        backgroundColor: '#4D55CC',
-        borderRadius: 12,
-        flex: 1,
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        padding: 20,
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        paddingHorizontal: 22,
+        backgroundColor: '#4D55CC', // Equivalent to bg-blue-500
+        borderRadius: '100%',
         alignItems: 'center',
         justifyContent: 'center',
     },

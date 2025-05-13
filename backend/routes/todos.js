@@ -7,15 +7,15 @@ const todoController = require("../controllers/todoControllers");
 // create 
 
 // GET all
-router.get("/", todoController.getTodos);
+router.get("/", todoController.getAllTodoController);
 
 // POST new
-router.post("/", todoController.createTodo);
+router.post("/", todoController.createTodoController);
 
 // PUT update
-router.put("/:id", todoController.updateTodo);
+router.put("/:id", todoController.updateTodoController);
 
 // DELETE
-router.delete("/:id", todoController.deleteTodo);
+router.delete("/:id", todoController.deleteTodoController);
 
 module.exports = router;

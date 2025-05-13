@@ -1,13 +1,19 @@
-const Todo = require("../models/Todo");
+const dotenv = require("dotenv");
+const JWT = require("jsonwebtoken");
+const { hashPassword, comparePassword } = require("../helpers/authHelper");
+const User = require("../models/User");
+var { expressjwt: jwt } = require("express-jwt");
+
+dotenv.config();
 
 //middleware
-export const authMiddelware = jwt({
+const requireSingIn = jwt({
     secret: process.env.JWT_SECRET,
     algorithms: ["HS256"],
 });
 
-
-exports.registerController = async (req, res) => {
+//register
+const registerController = async (req, res) => {
     try {
         const { name, email, password } = req.body;
         //validation
@@ -30,7 +36,7 @@ exports.registerController = async (req, res) => {
             });
         }
         //exisiting user
-        const exisitingUser = await userModel.findOne({ email });
+        const exisitingUser = await User.findOne({ email });
         if (exisitingUser) {
             return res.status(500).send({
                 success: false,
@@ -39,8 +45,9 @@ exports.registerController = async (req, res) => {
         }
         //hashed pasword
         const hashedPassword = await hashPassword(password);
+
         //save user
-        const user = await userModel({
+        const user = await User({
             name,
             email,
             password: hashedPassword,
@@ -60,7 +67,8 @@ exports.registerController = async (req, res) => {
     }
 };
 
-exports.loginController = async (req, res) => {
+//login
+const loginController = async (req, res) => {
     try {
         const { email, password } = req.body;
         //validation
@@ -71,7 +79,7 @@ exports.loginController = async (req, res) => {
             });
         }
         // find user
-        const user = await userModel.findOne({ email });
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(500).send({
                 success: false,
@@ -109,11 +117,12 @@ exports.loginController = async (req, res) => {
     }
 };
 
-exports.updateUserController = async (req, res) => {
+//update user
+const updateUserController = async (req, res) => {
     try {
         const { name, password, email } = req.body;
         //user find
-        const user = await userModel.findOne({ email });
+        const user = await User.findOne({ email });
         //password validate
         if (password && password.length < 6) {
             return res.status(400).send({
@@ -123,7 +132,7 @@ exports.updateUserController = async (req, res) => {
         }
         const hashedPassword = password ? await hashPassword(password) : undefined;
         //updated useer
-        const updatedUser = await userModel.findOneAndUpdate(
+        const updatedUser = await User.findOneAndUpdate(
             { email },
             {
                 name: name || user.name,
@@ -147,11 +156,9 @@ exports.updateUserController = async (req, res) => {
     }
 };
 
-exports.deleteTodo = async (req, res) => {
-    try {
-        await Todo.findByIdAndDelete(req.params.id);
-        res.status(200).json({ message: "Deleted" });
-    } catch (err) {
-        res.status(500).json({ status: 500, message: err.message });
-    }
+module.exports = {
+    requireSingIn,
+    registerController,
+    loginController,
+    updateUserController,
 };

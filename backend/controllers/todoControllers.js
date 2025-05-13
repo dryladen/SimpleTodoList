@@ -1,6 +1,17 @@
 const Todo = require("../models/Todo");
 
-exports.getTodos = async (_, res) => {
+const getAllTodoController = async (_, res) => {
+  try {
+    const todos = await Todo.find();
+    res.status(200).json({
+      status: 200,
+      message: todos,
+    });
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+const getTodoByUserController = async (_, res) => {
   try {
     const todos = await Todo.find();
     res.status(200).json({
@@ -12,7 +23,7 @@ exports.getTodos = async (_, res) => {
   }
 };
 
-exports.createTodo = async (req, res) => {
+const createTodoController = async (req, res) => {
   try {
     const newTodo = new Todo(req.body);
     const saved = await newTodo.save();
@@ -31,7 +42,7 @@ exports.createTodo = async (req, res) => {
   }
 };
 
-exports.updateTodo = async (req, res) => {
+const updateTodoController = async (req, res) => {
   try {
     const updated = await Todo.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -48,11 +59,19 @@ exports.updateTodo = async (req, res) => {
   }
 };
 
-exports.deleteTodo = async (req, res) => {
+const deleteTodoController = async (req, res) => {
   try {
     await Todo.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Deleted" });
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }
+};
+
+module.exports = {
+  getAllTodoController,
+  getTodoByUserController,
+  createTodoController,
+  updateTodoController,
+  deleteTodoController,
 };

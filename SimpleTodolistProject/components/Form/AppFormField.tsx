@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 
 const AppFormField = (props: any) => {
     const {
@@ -11,10 +11,11 @@ const AppFormField = (props: any) => {
 
     const hasError = errors[name] && touched[name];
     return (
-        <>
+        <View style={{ gap: 8 }}>
+            <Text style={{ textTransform: 'capitalize', fontWeight: '500', color: hasError ? 'red' : 'gray' }}>{name}</Text>
             <TextInput
                 style={{
-                    height: 40,
+                    height: 45,
                     width: '100%',
                     backgroundColor: 'white',
                     borderColor: hasError ? 'red' : 'gray',
@@ -34,7 +35,7 @@ const AppFormField = (props: any) => {
                 {...inputProps}
             />
             {hasError && <Text style={{ color: 'red' }}>{errors[name]}</Text>}
-        </>
+        </View>
     );
 };
 

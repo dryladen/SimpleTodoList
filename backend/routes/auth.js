@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authControllers = require("../controllers/authControllers");
-
+const { requireSingIn } = require("../controllers/authControllers");
 
 // add middleware for authentication
 
@@ -12,6 +12,6 @@ router.post("/register", authControllers.registerController);
 router.post("/login", authControllers.loginController);
 
 // PUT update user
-router.put("/update-user", authControllers.updateUserController);
+router.put("/update-user", requireSingIn, authControllers.updateUserController);
 
 module.exports = router;

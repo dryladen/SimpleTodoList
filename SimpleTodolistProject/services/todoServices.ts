@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_URL = 'http://10.0.2.2:3001/api/todos'; // ganti sesuai kebutuhan
 
 export const fetchTodos = async () => {
-  const res = await axios.get(API_URL);
+  const res = await axios.get(`${API_URL}/user`);
   return res.data;
 };
 

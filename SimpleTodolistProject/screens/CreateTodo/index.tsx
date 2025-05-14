@@ -9,6 +9,7 @@ import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import Icon from '@react-native-vector-icons/fontawesome6';
 import { createTodo } from '../../services/todoServices';
+import Navbar from '../../components/Navbar';
 
 const validationSchema = Yup.object().shape({
     todo: Yup.string().required('Todo is required').label('Todo'),
@@ -19,17 +20,7 @@ const CreateTodo = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <TouchableHighlight
-                    onPress={() => navigation.goBack()}
-                    underlayColor="#3b44bb"
-                    style={styles.backButton}
-                >
-                    <Icon iconStyle="solid" name="chevron-left" size={18} color="white" />
-                </TouchableHighlight>
-                <Text style={styles.headerTitle}>Create Todo</Text>
-            </View>
-
+            <Navbar title="Create Todo" />
             <View style={styles.formContainer}>
                 <AppForm
                     initialValues={{ todo: '' }}

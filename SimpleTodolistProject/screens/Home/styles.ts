@@ -73,19 +73,13 @@ export const styles = StyleSheet.create({
     highlight: {
         fontWeight: '700',
     },
-    flexRow: {
+    task: {
+        padding: 10,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: '#4D55CC',
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
-    flex1: {
-        flex: 1,
-    },
-    px4: {
-        paddingHorizontal: 16, // Equivalent to px-4
-    },
-    p2: {
-        padding: 8, // Equivalent to p-2
-    },
-    gap2: {
-        gap: 8, // Equivalent to gap-2
-    },
-});
+    });

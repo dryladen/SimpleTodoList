@@ -9,6 +9,7 @@ import Icon from '@react-native-vector-icons/fontawesome6';
 import { deleteTodo, fetchTodos } from '../../services/todoServices';
 import { styles } from './styles';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import Navbar from '../../components/Navbar';
 
 type Todolist = {
     _id: string;
@@ -20,7 +21,7 @@ function Home() {
     // Fetch todos from the API
     const loadTodos = async () => {
         const todos = await fetchTodos();
-        setTodolist(todos.message);
+        setTodolist(todos.todos);
     };
 
     useFocusEffect(
@@ -33,22 +34,12 @@ function Home() {
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1 }}>
-                <View style={styles.headerContainer}>
-                    <Text style={styles.headerTitle}> Todo List </Text>
-                </View>
-                {/* {todolist.length === 0 && (
-                    <View style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', flex: 1, gap: 8 }} >
-                        <View style={{ padding: 15, paddingHorizontal: 27, backgroundColor: '#4D55CC', borderRadius: 100 }} >
-                            <Icon name="exclamation" iconStyle="solid" size={30} color={'white'} />
-                        </View>
-                        <Text style={{ textAlign: 'center', color: 'red', fontSize: 14 }} > Server is down, please contact customer services for more information </Text>
-                    </View>
-                )} */}
+                <Navbar title="Todo List" isMain={true} />
                 < FlatList
                     data={todolist}
                     renderItem={({ item }) => (
-                        <View style={[styles.flexRow, styles.flex1, styles.px4, styles.p2, styles.gap2]} >
-                            <Text style={{ flexWrap: 'wrap', textTransform: 'capitalize', flex: 1 }} > {item.todo} </Text>
+                        <View style={[styles.task]} >
+                            <Text style={{ flexWrap: 'wrap', textTransform: 'capitalize', flex: 1, fontSize: 14, fontWeight: 500 }} > {item.todo} </Text>
                             <View style={{ flexDirection: 'row', gap: 10 }} >
                                 <TouchableHighlight
                                     // @ts-ignore

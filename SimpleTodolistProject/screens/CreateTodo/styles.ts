@@ -1,28 +1,31 @@
-import { StyleSheet } from "react-native";
+// styles.ts
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    textInput: {
-        height: 40,
-        width: '100%',
-        margin: 10,
+    container: {
+        flex: 1,
         backgroundColor: 'white',
-        borderColor: 'gray',
-        borderWidth: StyleSheet.hairlineWidth,
-        borderRadius: 10,
-    }, 
-    headerContainer: {
+    },
+    header: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        display: 'flex',
-        paddingVertical: 12,
-        paddingHorizontal: 20,
+        padding: 8,
         backgroundColor: '#4D55CC',
-    }, 
+        gap: 8,
+    },
+    backButton: {
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderRadius: 8,
+    },
     headerTitle: {
         fontSize: 18,
-        fontWeight: '600',
+        fontWeight: 'bold',
         color: 'white',
+        padding: 8,
     },
-
-})
+    formContainer: {
+        padding: 20,
+        flex: 1,
+    },
+});

@@ -6,6 +6,11 @@ const TodoSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Todo is required']
     },
+    createdBy: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'User is required']
+    },
   },
   {
     timestamps: true,

@@ -6,7 +6,7 @@ var { expressjwt: jwt } = require("express-jwt");
 
 dotenv.config();
 
-//middleware
+// Middleware
 const requireSingIn = jwt({
     secret: process.env.JWT_SECRET,
     algorithms: ["HS256"],
@@ -52,10 +52,15 @@ const registerController = async (req, res) => {
             email,
             password: hashedPassword,
         }).save();
-
+        //TOKEN JWT
+        const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "7d",
+        });
         return res.status(201).send({
             success: true,
-            message: "Registeration Successfull please login",
+            message: "Registeration Successfully",
+            token,
+            user,
         });
     } catch (error) {
         console.log(error);
@@ -103,7 +108,7 @@ const loginController = async (req, res) => {
         user.password = undefined;
         res.status(200).send({
             success: true,
-            message: "login successfully",
+            message: "Login successfully",
             token,
             user,
         });

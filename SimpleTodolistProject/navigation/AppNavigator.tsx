@@ -5,6 +5,7 @@ import CreateTodo from "../screens/CreateTodo";
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
 import useAuthStore from "../store/authStore";
+import Profile from "../screens/Profile";
 
 const Stack = createNativeStackNavigator<{
     Home: undefined;
@@ -12,6 +13,7 @@ const Stack = createNativeStackNavigator<{
     UpdateTodo: { id: string, todo: string };
     SignIn: undefined;
     SignUp: undefined;
+    Profile: undefined;
 }>();
 
 function AppNavigator() {
@@ -23,6 +25,7 @@ function AppNavigator() {
                     <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
                     <Stack.Screen name="CreateTodo" component={CreateTodo} options={{ headerShown: false }} />
                     <Stack.Screen name="UpdateTodo" component={UpdateTodo} options={{ headerShown: false }} />
+                    <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
                 </>)}
             <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
